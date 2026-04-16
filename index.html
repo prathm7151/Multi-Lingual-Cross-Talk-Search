@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Cross-Talk Search</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="background"></div>
+
+    <div class="container">
+        <h1>🌍 Cross-Talk Search</h1>
+        <p class="subtitle">Search across English, Hindi & Marathi documents</p>
+
+        <form method="POST" class="search-box">
+            <input type="text" name="query" placeholder="Search e.g. Renewable Energy..." required>
+            <button type="submit">🔍 Search</button>
+        </form>
+
+        {% if results %}
+        <div class="results">
+            <h2>Results</h2>
+            {% for file, score, lang in results %}
+            <div class="card">
+                <h3>{{ file }}</h3>
+                <p>Language: <span class="lang">{{ lang }}</span></p>
+                <p>Relevance Score: <span>{{ "%.3f"|format(score) }}</span></p>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+
+</body>
+
+</html>
